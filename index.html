@@ -1,3 +1,49 @@
-<h1>
-	Hello Git
-</h1>
+<!DOCTYPE html>
+<!-- pagina di login per Soldi -->
+<html>
+    <head>
+        <title>Soldi v1 Login</title>
+        <style>
+            body {
+                background-color: #ffffd1;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body onload="return checkLoginStatus();">
+        <div id="loginStatusErr" style="display: none; color: red; font-weight: bold;">Non hai eseguito l'accesso</div>
+        <form onsubmit="return checkPassword();">
+            <label for="passwd">Inserisci password:</label><br>
+            <input type="password" id="passwd">
+            <input type="submit" value="login">
+        </form>
+
+        <script>
+            // login form
+            function checkPassword() {
+                var password = document.getElementById("passwd").value;
+                if (password === "a") {
+                    console.log("Log in successful.");
+                    window.location.href = "soldi.php?hasLoggedIn=true";
+                    return false;
+                }
+                else {
+                    alert("password errata.");
+                    return false;
+                }
+            }
+
+            function checkLoginStatus() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const hasLoggedIn = urlParams.get('hasLoggedIn');
+                if (hasLoggedIn === "false") {
+                    var element = document.getElementById("loginStatusErr");
+                    if (element.style.display === "none") {
+                        element.style.display = "block";
+                    }
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>
